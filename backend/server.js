@@ -16,14 +16,17 @@ app.use("/api/items", itemRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err.message));
-
-// Run a normal server on your computer, but not on Vercel
-if (!process.env.VERCEL) {
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+async function connectDB() {
+  if (mongoose.connection.readyState === 1) return;
+  await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 5000 });
+  console.log("MongoDB connected");
 }
 
-module.exports = app;
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    res.status(500).json({ message: "DB connection failed", error: err.message });
+  }
+});
