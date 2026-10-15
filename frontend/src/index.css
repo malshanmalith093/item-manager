@@ -1,0 +1,13 @@
+body { font-family: system-ui, sans-serif; background: #f4f6f8; margin: 0; }
+.container { max-width: 640px; margin: 40px auto; padding: 0 16px; }
+h1 { margin-bottom: 16px; }
+form, .item { background: #fff; padding: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.1); margin-bottom: 12px; }
+form { display: flex; gap: 8px; flex-wrap: wrap; }
+input { flex: 1; min-width: 120px; padding: 8px; border: 1px solid #ccc; border-radius: 6px; }
+button { padding: 8px 14px; border: none; border-radius: 6px; cursor: pointer; background: #2563eb; color: #fff; }
+button.secondary { background: #6b7280; }
+button.danger { background: #dc2626; }
+.item { display: flex; justify-content: space-between; align-items: center; }
+.item p { margin: 2px 0; }
+.actions { display: flex; gap: 6px; }
+.error { color: #dc2626; }
